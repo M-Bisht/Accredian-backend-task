@@ -12,6 +12,7 @@ const logout = wrapAsync((req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
+    path: "/",
     expires: new Date(0),
   });
 

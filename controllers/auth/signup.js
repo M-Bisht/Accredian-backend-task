@@ -49,6 +49,7 @@ const signup = wrapAsync(async (req, res) => {
   const tokenVal = jwt.sign({ id: newId }, process.env.JWT_SECRET);
   res.cookie("token", tokenVal, {
     httpOnly: true,
+    path: "/",
     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
   });
 

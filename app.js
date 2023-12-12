@@ -15,13 +15,7 @@ dotEnv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-    cors({
-      origin: [process.env.FRONTEND_URL],
-      methods: ["GET", "POST"],
-      credentials: true,
-    })
-  );
+app.use(cors());
 
 app.get("/api/v1/user", isAuth, userDetails);
 app.post("/api/v1/signup", signup);

@@ -6,6 +6,7 @@ import userDetails from "./controllers/user/userDetails.js";
 import isAuth from "./helpers/isAuth.js";
 import cookieParser from "cookie-parser";
 import logout from "./controllers/auth/logout.js";
+import cors from "cors";
 
 export const app = express();
 dotEnv.config();
@@ -14,6 +15,13 @@ dotEnv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+    cors({
+      origin: [process.env.FRONTEND_URL],
+      methods: ["GET", "POST"],
+      credentials: true,
+    })
+  );
 
 app.get("/api/v1/user", isAuth, userDetails);
 app.post("/api/v1/signup", signup);

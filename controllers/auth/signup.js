@@ -49,7 +49,10 @@ const signup = wrapAsync(async (req, res) => {
   const tokenVal = jwt.sign({ id: newId }, process.env.JWT_SECRET);
   res.cookie("token", tokenVal, {
     httpOnly: true,
-    path: "/",
+    sameSite: 'None', // Allow cross-origin requests
+    secure: true, // Requires HTTPS
+    path: "/", // Adjust the path if needed
+    domain: 'http://localhost:5173', // Replace with the appropriate domain
     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
   });
 
